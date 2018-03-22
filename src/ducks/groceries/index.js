@@ -15,33 +15,30 @@ export const initialState = {
       name: 'Bananas',
       category: 'Fruit',
       deliveryMethod: 'Air',
+      selected: false
     },
     {
       id: 16,
       name: 'Whole Grain Bread',
       category: 'Grains',
       deliveryMethod: 'Air',
+      selected: false
     },
     {
       id: 100,
       name: 'Lettuce',
-      category: 'Vegitable',
+      category: 'Vegetable',
       deliveryMethod: 'Ground',
+      selected: false
     },
     {
       id: 10,
       name: 'Roasted Turkey',
       category: 'Deli',
       deliveryMethod: 'Ground',
+      selected: false
     },
-  ],
-  isItemSelected: false,
-  selectedItem: {
-    id: 0,
-    name: '',
-    category: '',
-    deliveryMethod: '',
-  },
+  ]
 };
 
 // Reducers
@@ -55,16 +52,26 @@ export default function reducer(state = initialState, action) {
       });
 
     case REMOVE_ITEM:
-      // Write a custom reducer that will remove an item from the list array
-      return state; 
+      let afterRemove = state.list.filter(obj => obj !== payload);
+      return { list: afterRemove }
 
     case SELECT_ITEM:
-      // Write a custom reducer that will select an item
-      return state;
+      let afterSelect = state.list.map(obj => {
+        if (obj === payload) {
+          obj.selected = true;
+        }
+        return obj;
+      });
+      return { list: afterSelect }
 
     case DESELECT_ITEM:
-      // Write a customer reducer that will deselect an item
-      return state;
+      let afterDeselect = state.list.map(obj => {
+        if (obj === payload) {
+          obj.selected = false;
+        }
+        return obj;
+      });
+      return { list: afterDeselect }
 
     default:
       return state;
@@ -72,7 +79,30 @@ export default function reducer(state = initialState, action) {
 };
 
 // Action Creators
-export const addItem = item => ({
-  type: ADD_ITEM,
-  payload: item,
-});
+export const addItem = item => {
+  return ({
+    type: ADD_ITEM,
+    payload: item,
+  });
+}
+
+export const removeItem = item => {
+  return ({
+    type: REMOVE_ITEM,
+    payload: item,
+  });
+}
+
+export const selectItem = item => {
+  return ({
+    type: SELECT_ITEM,
+    payload: item,
+  });
+}
+
+export const deselectItem = item => {
+  return ({
+    type: DESELECT_ITEM,
+    payload: item,
+  });
+}
