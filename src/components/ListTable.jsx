@@ -16,10 +16,10 @@ class ListTable extends Component {
     const { list } = this.props;
     return (
       <div className="listTable">
-        <table>
+        <table className="groceries">
           <tbody>
             <tr>
-              <th>Grocery</th>
+              <th>Grocery Item</th>
               <th>Select</th>
               <th>Deselect</th>
               <th>Remove</th>
