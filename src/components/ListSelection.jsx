@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ListSelection = ({ list }) => {
   return (
@@ -16,6 +17,8 @@ const ListSelection = ({ list }) => {
   );
 }
 
-
+ListSelection.propTypes = {
+  list: PropTypes.array.isRequired
+};
 
 export default ListSelection;
